@@ -109,3 +109,77 @@ curl --socks5 127.0.0.1:44000 http://208.95.112.1/json/
 - 全部机房 IP（Contabo/m247/Gcore…），对 Cloudflare 盾友好的站点通过率低于住宅代理；
 - 上游是第三方基础设施，**对方换证/换 IP 后需重新 `harvest.py`**（一条命令，约 10 分钟）；
 - 不支持只走 TCP 的站点场景（配置全是 UDP/1194；`hastcp` 字段为 true 但当前下发只有 UDP 配置）。
+
+---
+
+## 7. 四个必避坑（2026-10-29 读 new-api 源码确认，Russia VPN 对接时补充）
+
+以下四点是同平台 Russia VPN（`lza6/Russia-VPN-APP`）对接时逐行核对源码确认的，
+**对 Indonesia 这批节点同样成立**，对接前务必过一遍。
+
+### 7.1 文件加载的代理**不会**被真实出口拨测
+
+```go
+// proxy_pool.go TraceProbes()
+for _, e := range proxyPool {
+    if e.source != "free" {   // ← 住宅/文件源直接跳过
+        continue
+    }
+```
+`TRYINGOPEN_PROXY_FILE` 加载出来的条目 `source="residential"`，源码注释写明
+"住宅代理跳过（host 即出口，且有凭据不宜外发第三方）"。
+**所以 new-api 不会帮你验证出口 IP** —— 正确性必须由转换层（`pool_wsl.py` 的
+`check_exit_ip()`）自己保证，这也是本项目每条隧道都要过出口校验的原因。
+
+### 7.2 容器里 `127.0.0.1` 指的是容器自己，不是宿主
+
+转换层跑在宿主/WSL 上时，清单里的 `socks5://127.0.0.1:44000` 在容器内**连不通**。
+三选一：
+
+| 方案 | 做法 | 代价 |
+|------|------|------|
+| A. `extra_hosts` | 清单改 `socks5://host.docker.internal:44000`，并给 new-api 加 `host.docker.internal:host-gateway`；转发器要绑 `0.0.0.0` 而非 `127.0.0.1` | 端口从本机扩到内网可见，需配合防火墙 |
+| B. `network_mode: host` | 清单保持 `127.0.0.1` | 失去容器网络隔离 |
+| C. 转换层进同一 compose 网络 | 清单写 `socks5://<服务名>:44000` | 需要把 `pool_wsl.py` 容器化（`--privileged` + `/dev/net/tun`） |
+
+### 7.3 可以**追加**而不是替换现有代理源
+
+`TRYINGOPEN_PROXY_FILE` 支持**逗号分隔多文件**（源码注释明写"住宅清单 + 本地协议转换层
+天然是两份来源，没必要让运维手动合并"）：
+
+```
+TRYINGOPEN_PROXY_FILE=/app/proxies/residential.txt,/app/proxies/indonesia.txt
+```
+
+两者都会以 `source="residential"` / `healthScore=1.0` 进池，重复 URL 自动去重。
+**不需要动现有的住宅代理配置**，这也是最安全的灰度方式。
+
+### 7.4 冷却与熔断参数（决定"看起来池子很大但很快没可用"）
+
+- **429 冷却**：按 24h 窗口内的使用次数递增 `0 → 30s → 90s → 300s → 900s`
+  （`TRYINGOPEN_USE_COOLDOWN_MAP` 可覆盖）。端口数少时会迅速整池冷却。
+- **其它失败**：固定 30s 冷却。
+- **全局熔断**：同一代理连续失败 **5** 次 → 进入 **10 分钟**全局冷却（`globalFailThreshold`）。
+  隧道抖动造成的集中失败会表现为"整池突然没可用"，别误判成节点全死。
+- **每日限额**：`TRYINGOPEN_PROXY_MAX_USE_PER_DAY`（0=不限）。端口数固定时建议设上限。
+
+---
+
+## 8. 验证必须三层（只看池快照 ≠ 接通）
+
+```bash
+# ① 隧道层：出口 IP 是否 == 该节点标称国家（本项目实测每端口直出不中转）
+ip netns exec vpn0 curl -s "http://208.95.112.1/json/?fields=query,country,isp"
+
+# ② 池层：确认 source=residential 里出现你的 indonesia 条目
+curl -s "$BASE/api/twoapi/proxy_pool?page_size=50" \
+  -H "Authorization: Bearer $ADMIN_TOKEN" | jq '.'
+
+# ③ 业务层（唯一能证明"流量真走了它"的一层）
+#    发一个真实请求，然后在上游侧/抓包核对来源 IP 与目的端口
+curl -s "$BASE/v1/chat/completions" -H "Authorization: Bearer $USER_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"tryingopen/qwen/qwen3.8-flash","messages":[{"role":"user","content":"hi"}]}'
+```
+
+**② 有条目不等于流量走了这条代理**，这是同平台上最容易出现的假验证。
