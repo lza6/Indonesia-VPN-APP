@@ -1,0 +1,31 @@
+﻿socks,public_port,country,exit_ip,exit_isp,exit_city,handshake_s,node_file
+socks5://127.0.0.1:44000,44000,US,107.152.45.30,Cloudfanatic.NET,Phoenix,,935_US_Phoenix_Phoenix_08.ovpn
+socks5://127.0.0.1:44001,44001,Indonesia,157.15.77.190,CV. NATANETWORK SOLUTION,Banjarmasin,1.17,13_Indonesia_Jakarta4_Jakarta_05.ovpn
+socks5://127.0.0.1:44002,44002,Indonesia,157.15.77.187,CV. NATANETWORK SOLUTION,Banjarmasin,1.29,7_Indonesia_West_Java_West_Java_01.ovpn
+socks5://127.0.0.1:44003,44003,Indonesia,157.15.77.187,CV. NATANETWORK SOLUTION,Banjarmasin,1.3,29_Indonesia_West_Java1_West_Java_-_20.ovpn
+socks5://127.0.0.1:44004,44004,Indonesia,157.15.77.190,CV. NATANETWORK SOLUTION,Banjarmasin,1.35,26_Indonesia_Jakarta2_Indonesia_-_32.ovpn
+socks5://127.0.0.1:44005,44005,Indonesia,103.167.35.15,Industri Kreatif Digital,Jakarta,1.38,1499_Indonesia_Jakarta5_Jakarta_44.ovpn
+socks5://127.0.0.1:44006,44006,Indonesia,43.230.131.59,Internet Ini Saja,Gubengairlangga,1.43,1512_Indonesia_Jakarta8_Jakarta_57.ovpn
+socks5://127.0.0.1:44007,44007,Indonesia,103.167.35.39,Industri Kreatif Digital,Jakarta,1.43,1514_Indonesia_East_Java1_Jakarta_59.ovpn
+socks5://127.0.0.1:44008,44008,Indonesia,103.196.116.184,PT. Media Antar Nusa,Medan,1.46,1548_Indonesia_Jakarta3_Jakarta_71.ovpn
+socks5://127.0.0.1:44009,44009,Indonesia,103.167.35.42,Industri Kreatif Digital,Jakarta,1.47,1517_Indonesia_Jakarta2_Jakarta_62.ovpn
+socks5://127.0.0.1:44010,44010,Indonesia,103.196.116.205,PT. Media Antar Nusa,Medan,1.48,1433_Indonesia_Jakarta_Jakarta_31.ovpn
+socks5://127.0.0.1:44011,44011,Indonesia,43.230.131.77,Internet Ini Saja,Gubengairlangga,1.48,1553_Indonesia_Jakarta7_Jakarta_76.ovpn
+socks5://127.0.0.1:44012,44012,Indonesia,103.196.116.225,PT. Media Antar Nusa,Medan,1.49,1454_Indonesia_Jakarta6_Jakarta_39.ovpn
+socks5://127.0.0.1:44013,44013,Indonesia,103.167.35.36,Industri Kreatif Digital,Jakarta,1.5,1513_Indonesia_East_Java1_Jakarta_58.ovpn
+socks5://127.0.0.1:44014,44014,Indonesia,103.167.35.45,Industri Kreatif Digital,Jakarta,1.51,1503_Indonesia_Jakarta3_Jakarta_48.ovpn
+socks5://127.0.0.1:44015,44015,Indonesia,103.167.35.9,Industri Kreatif Digital,Jakarta,1.53,1465_Indonesia_Jakarta7_Jakarta_42.ovpn
+socks5://127.0.0.1:44016,44016,Indonesia,103.196.116.149,PT. Media Antar Nusa,Medan,1.54,1547_Indonesia_Jakarta6_Jakarta_70.ovpn
+socks5://127.0.0.1:44017,44017,Indonesia,103.167.35.14,Industri Kreatif Digital,Jakarta,1.54,6_Indonesia_East_Java1_East_Java_02.ovpn
+socks5://127.0.0.1:44018,44018,Indonesia,103.167.35.12,Industri Kreatif Digital,Jakarta,1.56,21_Indonesia_Jakarta1_Jakarta_-_100.ovpn
+socks5://127.0.0.1:44019,44019,Indonesia,103.167.35.59,Industri Kreatif Digital,Jakarta,1.6,1417_Indonesia_Jakarta8_Jakarta_25.ovpn
+socks5://127.0.0.1:44020,44020,Indonesia,103.167.35.3,Industri Kreatif Digital,Jakarta,1.6,1515_Indonesia_East_Java1_Jakarta_60.ovpn
+socks5://127.0.0.1:44021,44021,Indonesia,43.230.131.73,Internet Ini Saja,Gubengairlangga,1.6,1550_Indonesia_Jakarta6_Jakarta_73.ovpn
+socks5://127.0.0.1:44022,44022,Indonesia,103.121.122.240,CV. NATANETWORK SOLUTION,Jakarta,1.61,1_Indonesia_East_Java_East_Java_01.ovpn
+socks5://127.0.0.1:44023,44023,Indonesia,43.230.131.74,Internet Ini Saja,Gubengairlangga,1.62,1551_Indonesia_Jakarta3_Jakarta_74.ovpn
+socks5://127.0.0.1:44024,44024,Indonesia,103.167.35.14,Industri Kreatif Digital,Jakarta,1.62,24_Indonesia_Jakarta3_Jakarta_-_20.ovpn
+socks5://127.0.0.1:44025,44025,Indonesia,103.167.35.48,Industri Kreatif Digital,Jakarta,1.63,1518_Indonesia_Jakarta2_Jakarta_63.ovpn
+socks5://127.0.0.1:44026,44026,Indonesia,202.157.184.91,PT. EXABYTES NETWORK INDONESIA,Jakarta,1.63,1544_Indonesia_Jakarta4_Jakarta_69.ovpn
+socks5://127.0.0.1:44027,44027,Indonesia,103.196.116.243,PT. Media Antar Nusa,Medan,1.63,1549_Indonesia_Jakarta7_Jakarta_72.ovpn
+socks5://127.0.0.1:44028,44028,Indonesia,103.196.116.177,PT. Media Antar Nusa,Medan,1.65,1453_Indonesia_Jakarta4_Jakarta_38.ovpn
+socks5://127.0.0.1:44029,44029,Indonesia,103.167.35.46,Industri Kreatif Digital,Jakarta,1.65,1502_Indonesia_Jakarta6_Jakarta_47.ovpn

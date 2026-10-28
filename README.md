@@ -1,5 +1,10 @@
 # INDONESIA VPN (mobilejumps site40) — 节点池逆向与收割
 
+> **仓库关系**：`lza6/Indonesia-VPN-APP`（本仓库，规范命名）与
+> `lza6/IndonesiaVPN-APP-2api`（早期命名）为同一份成果，两者同步维护；
+> 与 `lza6/Russia-VPN-APP` 同属 mobilejumps 白标平台的两个 `siteNN` 实例（slug 重叠 413/1104）。
+>
+
 > APK：`INDONESIA VPN v1.8.5.7 b1857 (Premium by @ElaMods)`
 > 包名：`free.vpn.secure.turbo.proxy.hotspot.vpnindonesia`
 > 交付日期：2026-10-29

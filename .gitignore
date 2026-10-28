@@ -1,6 +1,9 @@
 # ===== 凭证类运行期产物：绝不入库 =====
 # 真实的 .ovpn（内含客户端私钥 + tls-crypt 静态密钥 + CA 证书）
-output/
+output/*
+# 例外：节点清单类产物不含凭证，是交付价值所在，入库
+!output/exports/
+!output/exports/**
 recon/
 *.ovpn
 !samples/sample.redacted.ovpn
@@ -9,7 +12,6 @@ recon/
 details.json
 allservers.json
 analysis.json
-exports/
 probe_*.json
 *_hits.json
 
